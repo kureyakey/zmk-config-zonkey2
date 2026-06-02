@@ -4,14 +4,14 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: cormoran
       url-base: https://github.com/cormoran
-    - name: inorichi
-      url-base: https://github.com/inorichi
+    - name: kureyakey
+      url-base: https://github.com/kureyakey
     - name: caksoylar
       url-base: https://github.com/caksoylar  
   projects:
     - name: zmk
       remote: cormoran          
-      revision: main+dya        # ← 最初のZephyr 4.1ベースのStudio対応ブランチに戻します
+      revision: v0.3-branch+dya
       import: app/west.yml
     - name: zmk-module-ble-management
       remote: cormoran
@@ -28,8 +28,11 @@ manifest:
     - name: zmk-behavior-runtime-sensor-rotate
       remote: cormoran
       revision: main
+    - name: zmk-pmw3610-driver
+      remote: kureyakey
+      revision: main
     - name: zmk-rgbled-widget
       remote: caksoylar
-      revision: main
+      revision: v0.3
   self:
     path: config
