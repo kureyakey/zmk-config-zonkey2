@@ -1,13 +1,6 @@
 #include "zonkey.dtsi"
 
-/ {
-    aliases {
-        /* led_strip という名前のノードが存在するはずですので、それを指します */
-        led-red = &led_strip;
-        led-green = &led_strip;
-        led-blue = &led_strip;
-    };
-};
+/* aliases ブロックを削除しました */
 
 &kscan0 {
     col-gpios
