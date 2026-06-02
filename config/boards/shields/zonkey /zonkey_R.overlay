@@ -1,14 +1,13 @@
 #include "zonkey.dtsi"
-#include <behaviors/battery_history_request.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
 
 / {
-    /* V3.0環境では、zmk,behavior-noneの再定義（none: none）は競合の元になるため削除します */
-
-    /* trackball_listener の定義（V3.0標準のシンプルな形に修正） */
+    /* trackball_listener の定義 (Zephyr 4.1 / Studioモジュール対応版) */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&trackball>;
+        input-processors = <&zip_xy_scaler 1 1>; // Studio側で倍率変更できるようにプロセッサを噛ませる
     };
 };
 
@@ -53,15 +52,15 @@
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 
-    trackball: trackball@0 {
+    trackball: pmw3610@0 { // ← 内蔵ドライバーが要求するノード名形式
         status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        
-        // V3.0の外部ドライバー環境では、ここでレイヤー制御を行います
-        automouse-layer = <6>;
-        scroll-layers = <5>;
+        /* Zephyr 4.1環境かつStudioモジュールを使う場合、
+           automouseやscrollのレイヤー指定はここへの直書きではなく、
+           Studio（画面側）や、cormoran氏のインプットプロセッサ側でリアルタイム制御します。
+        */
     };
 };
