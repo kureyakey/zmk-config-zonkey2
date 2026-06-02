@@ -1,33 +1,14 @@
 #include "zonkey.dtsi"
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h> // ← これを追加しました
-#include <input/processors/runtime-input-processor.dtsi>
 #include <behaviors/battery_history_request.dtsi>
 
 / {
-    behaviors {
-        none: none {
-            compatible = "zmk,behavior-none";
-            #binding-cells = <0>;
-        };
-    };
+    /* V3.0環境では、zmk,behavior-noneの再定義（none: none）は競合の元になるため削除します */
 
-    /* trackball_listener の定義 */
+    /* trackball_listener の定義（V3.0標準のシンプルな形に修正） */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&trackball>;
-        input-processors = <&mouse_runtime_input_processor>;
-
-        scroller {
-            layers = <5>;
-            input-processors =
-                <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,
-                <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,
-                <&zip_scroll_scaler 1 5>,
-                input-processors = <&scroll_runtime_input_processor>;
-        };
     };
 };
 
@@ -78,5 +59,9 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        
+        // V3.0の外部ドライバー環境では、ここでレイヤー制御を行います
+        automouse-layer = <6>;
+        scroll-layers = <5>;
     };
 };
