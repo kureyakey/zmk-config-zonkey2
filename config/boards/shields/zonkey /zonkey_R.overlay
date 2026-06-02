@@ -64,10 +64,11 @@
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        motion-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
 
-        /* Zephyr 4.1 / ZMK本家規格で必須の相対軸マッピングを追加 */
+        /* 💡 Zephyr公式バインディングの仕様に合わせて修正 */
+        gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;      // irq-gpios から gpios に変更
+        motion-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // 引き続きダミー、またはMotionピン
+        
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
     };
