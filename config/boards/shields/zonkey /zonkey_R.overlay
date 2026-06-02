@@ -1,21 +1,8 @@
 #include "zonkey.dtsi"
-#include <dt-bindings/zmk/input_transform.h>
 
 / {
-    /* ここにインプットプロセッサの定義を追加 */
-    zip_xy_scaler: zip_xy_scaler {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <2>;
-        type = <INPUT_EV_REL>;
-    };
-
-    /* trackball_listener の定義 */
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&trackball>;
-        input-processors = <&zip_xy_scaler 1 1>; // これで定義が噛み合います
-    };
+    /* インプットプロセッサやリスナーは一旦すべて削除し、
+       3.5.0で確実に通るセンサーの基本定義だけにします */
 };
 
 &default_transform {
@@ -64,10 +51,6 @@
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-
-        /* Zephyr 3.5.0環境（zmk-pmw3610-driver）の正しい指定方法 */
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        
-        /* 💡 Zephyr 4.x用の zephyr,axis-x, zephyr,axis-y, motion-gpios などの記述はすべて削除します */
     };
 };
