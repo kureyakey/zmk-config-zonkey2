@@ -3,6 +3,15 @@
 
 / {
     /* Custom behaviors can go here, but avoid redefining 'none' */
+
+    // ----------------------------------------------------
+    // zmk-rgbled-widget 用の LED エイリアス設定
+    // ----------------------------------------------------
+    aliases {
+        led-red = &led0;    // Xiao BLE オンボード赤色LED
+        led-green = &led1;  // Xiao BLE オンボード緑色LED
+        led-blue = &led2;   // Xiao BLE オンボード青色LED
+    };
 };
 
 &kscan0 {
