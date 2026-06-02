@@ -63,6 +63,11 @@
     };
 };
 
+&pmw3610 {
+    status = "okay";
+    motion-gpios = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+};
+
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
