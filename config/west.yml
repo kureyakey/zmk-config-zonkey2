@@ -32,7 +32,7 @@ manifest:
       remote: kureyakey
       revision: main
     - name: zmk-rgbled-widget
-      remote: kureyakey
-      revision: main
+      remote: caksoylar
+      revision: v0.3
   self:
     path: config
