@@ -1,6 +1,6 @@
 #include "zonkey.dtsi"
 #include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h> // ← これを追加しました
+#include <dt-bindings/zmk/input_transform.h>
 #include <input/processors/runtime-input-processor.dtsi>
 
 / {
@@ -11,7 +11,6 @@
         };
     };
 
-    /* trackball_listener の定義 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         status = "okay";
@@ -48,24 +47,11 @@
     spi0_default: spi0_default {
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                <NRF_PSEL(SPIM_MISO, 0, 4)>;
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>;
+                    /* MISOピンが不要なら削除、必要なら別のピンを指定 */
         };
     };
-
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                <NRF_PSEL(SPIM_MISO, 0, 4)>;
-            low-power-enable;
-        };
-    };
-};
-
-&pmw3610 {
-    status = "okay";
-    motion-gpios = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    /* sleepも同様に修正 */
 };
 
 &spi0 {
@@ -82,5 +68,14 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    };
+
+    /* LED用定義を追加してエラーを解消 */
+    led_strip: ws2812@1 {
+        compatible = "worldsemi,ws2812-spi";
+        reg = <1>;
+        spi-max-frequency = <4000000>;
+        chain-length = <1>;
+        color-mapping = <LED_COLOR_ID_GRB>;
     };
 };
