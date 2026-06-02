@@ -13,25 +13,28 @@ manifest:
       remote: cormoran          
       revision: v0.3-branch+dya
       import: app/west.yml
-    # すべて main ではなく v0.3 に書き換えて固定します
-    - name: zmk-module-ble-management
-      remote: cormoran
-      revision: v0.3
-    - name: zmk-module-battery-history
-      remote: cormoran
-      revision: v0.3
-    - name: zmk-module-settings-rpc
-      remote: cormoran
-      revision: v0.3
-    - name: zmk-module-runtime-input-processor
-      remote: cormoran
-      revision: v0.3
-    - name: zmk-behavior-runtime-sensor-rotate
-      remote: cormoran
-      revision: v0.3
+    
+    # ここから下の拡張機能モジュールは、一旦すべてコメントアウト（# を先頭に追加）してください
+    # これによりビルド環境の衝突を回避します
+    # - name: zmk-module-ble-management
+    #   remote: cormoran
+    #   revision: main
+    # - name: zmk-module-battery-history
+    #   remote: cormoran
+    #   revision: main
+    # - name: zmk-module-settings-rpc
+    #   remote: cormoran
+    #   revision: main
+    # - name: zmk-module-runtime-input-processor
+    #   remote: cormoran
+    #   revision: main
+    # - name: zmk-behavior-runtime-sensor-rotate
+    #   remote: cormoran
+    #   revision: main
+    
     - name: zmk-pmw3610-driver
       remote: kureyakey
-      revision: main # これは更新頻度が低いため main のままでOKな場合が多いです
+      revision: main
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: v0.3
