@@ -2,8 +2,8 @@ manifest:
   remotes:
     - name: cormoran
       url-base: https://github.com/cormoran
-   - name: caksoylar
-      url-base: https://github.com/caksoylar  
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
       
   projects:
     - name: zmk
