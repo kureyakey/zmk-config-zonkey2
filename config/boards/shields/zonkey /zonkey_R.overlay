@@ -65,11 +65,9 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
 
-        /* 💡 Zephyr公式バインディングの仕様に合わせて修正 */
-        gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;      // irq-gpios から gpios に変更
-        motion-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // 引き続きダミー、またはMotionピン
+        /* Zephyr 3.5.0環境（zmk-pmw3610-driver）の正しい指定方法 */
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
-        zephyr,axis-x = <INPUT_REL_X>;
-        zephyr,axis-y = <INPUT_REL_Y>;
+        /* 💡 Zephyr 4.x用の zephyr,axis-x, zephyr,axis-y, motion-gpios などの記述はすべて削除します */
     };
 };
