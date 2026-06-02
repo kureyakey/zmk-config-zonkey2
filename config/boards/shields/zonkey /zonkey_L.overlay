@@ -1,7 +1,11 @@
 #include "zonkey.dtsi"
 
 / {
-    /* Custom behaviors can go here, but avoid redefining 'none' */
+   aliases {
+        led-red = &led_strip_red;    /* 実際のLEDノード名に合わせて変更してください */
+        led-green = &led_strip_green;
+        led-blue = &led_strip_blue;
+    };
 };
 
 &kscan0 {
